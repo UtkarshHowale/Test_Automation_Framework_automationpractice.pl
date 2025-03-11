@@ -21,6 +21,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+
+    - name: Debug File Structure
+      run: ls -R  # Ensure test data files exist
+      
     - name: Running Automation Framework With Maven
       run: mvn test -Dbrowser=chrome -DisLambdaTest=true -DisHeadless=true -X 
       
