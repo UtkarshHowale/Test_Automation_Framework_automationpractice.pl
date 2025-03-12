@@ -13,7 +13,7 @@ import com.ui.pages.HomePage;
 import com.utility.BrowserUtility;
 import com.utility.LambdaTestUtility;
 
-public class TestBase {
+public abstract class TestBase {
 
 	protected HomePage homePage;
 	private boolean isLambdaTest;

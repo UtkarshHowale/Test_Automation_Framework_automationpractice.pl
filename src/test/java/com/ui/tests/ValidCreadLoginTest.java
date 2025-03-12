@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import com.ui.pojo.User;
 
 @Listeners({ com.ui.listerners.TestListerner.class })
-public class ValidCreadLoginTest extends TestBase {
+public final class ValidCreadLoginTest extends TestBase {
 
 	@Test(description = "Verify valid user is login to the application.", groups = {
 			"sanity" }, dataProviderClass = com.ui.dataproviders.LoginDataProvider.class, dataProvider = "LoginTestJSONDataProvider", retryAnalyzer = com.ui.listerners.MyRetryAnalyzer.class)

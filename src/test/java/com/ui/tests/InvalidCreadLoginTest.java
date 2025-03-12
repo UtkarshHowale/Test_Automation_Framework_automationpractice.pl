@@ -6,7 +6,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners({ com.ui.listerners.TestListerner.class })
-public class InvalidCreadLoginTest extends TestBase {
+public final class InvalidCreadLoginTest extends TestBase {
 
 	private static final String INVALID_EMAIL_ADDRESS = "wixeti8618@apklamp.com";
 	private static final String INVALID_PASSWORD = "test@1234";

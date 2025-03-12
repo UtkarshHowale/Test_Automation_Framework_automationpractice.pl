@@ -9,6 +9,7 @@
 		<classes>
 			<class name="com.ui.tests.ValidCreadLoginTest" />
 			<class name="com.ui.tests.InvalidCreadLoginTest" />
+			<class name="com.ui.tests.SearchProductTest" />
 		</classes>
 	</test> <!--
 	Test -->
