@@ -33,8 +33,7 @@ public final class HomePage extends BrowserUtility {
 	public LoginPage goToLoginPage() {
 
 		clickOn(SIGN_IN_LINK_LOCATOR);
-		LoginPage loginPage = new LoginPage(getDriver());
-		return loginPage;
+		return new LoginPage(getDriver());
 	}
 
 	public void quit() {

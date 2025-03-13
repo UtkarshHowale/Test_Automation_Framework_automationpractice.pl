@@ -21,8 +21,8 @@ public final class LoginPage extends BrowserUtility {
 		enterText(EMAIL_TEXT_BOX_LOCATOR, emailAddress);
 		enterText(PAASWORD_TEXT_BOX_LOCATOR, password);
 		clickOn(SUBMIT_BUTTON_LOCATOR);
-		MyAccountPage myAccountPage = new MyAccountPage(getDriver());
-		return myAccountPage;
+		return new MyAccountPage(getDriver());
+
 	}
 
 	public LoginPage doLoginWithInvalidCredentials(String emailAddress, String password) {
@@ -30,8 +30,7 @@ public final class LoginPage extends BrowserUtility {
 		enterText(EMAIL_TEXT_BOX_LOCATOR, emailAddress);
 		enterText(PAASWORD_TEXT_BOX_LOCATOR, password);
 		clickOn(SUBMIT_BUTTON_LOCATOR);
-		LoginPage loginPage = new LoginPage(getDriver());
-		return loginPage;
+		return new LoginPage(getDriver());
 	}
 
 	public String getErrorMessage() {
