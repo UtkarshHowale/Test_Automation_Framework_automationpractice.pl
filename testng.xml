@@ -11,6 +11,7 @@
 			<class name="com.ui.tests.InvalidCreadLoginTest" />
 			<class name="com.ui.tests.SearchProductTest" />
 			<class name="com.ui.tests.AddFirstAddressTest" />
+			<class name="com.ui.tests.ProductCheckoutTest" />
 		</classes>
 	</test> <!--
 	Test -->
