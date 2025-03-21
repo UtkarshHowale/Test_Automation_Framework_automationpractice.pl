@@ -10,8 +10,9 @@
 			<class name="com.ui.tests.ValidCreadLoginTest" />
 			<class name="com.ui.tests.InvalidCreadLoginTest" />
 			<class name="com.ui.tests.SearchProductTest" />
-			<class name="com.ui.tests.AddFirstAddressTest" />
+			<class name="com.ui.tests.AddAddressTest" />
 			<class name="com.ui.tests.ProductCheckoutTest" />
+			<class name="com.ui.tests.NewUserRegistrationTest" />
 		</classes>
 	</test> <!--
 	Test -->
