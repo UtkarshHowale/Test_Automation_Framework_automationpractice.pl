@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import com.github.javafaker.Faker;
 import com.ui.pojo.AddressPOJO;
+import com.ui.pojo.RegistrationPOJO;
+import com.ui.pojo.LoginPOJO;
 
 public class FakerUtility {
 
@@ -17,5 +19,26 @@ public class FakerUtility {
 				faker.address().state());
 
 		return addressPOJO;
+	}
+
+	public static RegistrationPOJO getRegistrationDetails() {
+
+		Faker faker = new Faker();
+		String firstName = faker.name().firstName();
+		String lastName = faker.name().lastName();
+		String password = faker.name().firstName() + "@123";
+		RegistrationPOJO registrationPOJO = new RegistrationPOJO(firstName, lastName, password);
+
+		return registrationPOJO;
+	}
+
+	public static LoginPOJO getEmailDetails() {
+
+		Faker faker = new Faker();
+		String firstName = faker.name().firstName();
+		String lastName = faker.name().lastName();
+		String emailAddress = firstName + lastName + "@gmail.com";
+		LoginPOJO loginPOJO = new LoginPOJO(emailAddress);
+		return loginPOJO;
 	}
 }

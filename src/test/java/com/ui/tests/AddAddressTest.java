@@ -8,21 +8,29 @@ import org.testng.annotations.Test;
 import com.ui.pages.AddressPage;
 import com.ui.pages.MyAccountPage;
 import com.ui.pojo.AddressPOJO;
+import com.ui.pojo.LoginPOJO;
+import com.ui.pojo.RegistrationPOJO;
 import com.utility.FakerUtility;
 
-public final class AddFirstAddressTest extends TestBase {
+public final class AddAddressTest extends TestBase {
 
 	private MyAccountPage myAccountPage;
 	private AddressPOJO addressPOJO;
+	private RegistrationPOJO registrationPOJO;
+	private LoginPOJO loginPOJO;
 
-	@BeforeMethod(description = "Verify valid first time user logged-in into the application.")
+	@BeforeMethod(description = "Verify new user able to create account into the application.")
 	public void setup() {
 
-		myAccountPage = homePage.goToLoginPage().doLoginWithValidCredentials("wixeti8618@apklamp.com", "Testing@123");
+		loginPOJO = FakerUtility.getEmailDetails();
+		registrationPOJO = FakerUtility.getRegistrationDetails();
+		myAccountPage = homePage.goToLoginPage().goToAccountRegistrationPage(loginPOJO)
+				.registerNewUser(registrationPOJO, 0, "16", "April ", "1999");
 		addressPOJO = FakerUtility.getFakeAddress();
+
 	}
 
-	@Test
+	@Test(description = "Verify new user able to add address for the account.")
 	public void addNewAddress() {
 
 		String newAddress = myAccountPage.goToAddAddressPage().saveAddress(addressPOJO);

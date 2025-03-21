@@ -165,7 +165,7 @@ public abstract class BrowserUtility {
 		logger.info("Element found and now performing click");
 		element.click();
 	}
-	
+
 	public void clickOnCheckBox(By locator) {
 
 		logger.info("Finding element with the locator " + locator);
@@ -233,6 +233,23 @@ public abstract class BrowserUtility {
 
 	}
 
+	public void selectRadioButton(By locator, int indexNumber) {
+
+		logger.info("Finding element with the locator " + locator);
+		List<WebElement> elementList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+		logger.info("Total Radio button elements found: " + elementList.size());
+
+		WebElement radioButton = elementList.get(indexNumber);
+
+		if (!radioButton.isSelected()) {
+			radioButton.click();
+			logger.info("Radio button selected at index: " + indexNumber);
+		} else {
+			logger.info("Radio button at index " + indexNumber + " is already selected.");
+		}
+
+	}
+
 	public List<WebElement> getAllElements(By locator) {
 
 		logger.info("Finding element with the locator " + locator);
@@ -256,6 +273,33 @@ public abstract class BrowserUtility {
 		Select select = new Select(element);
 		logger.info("Option to select " + optionToSelect);
 		select.selectByVisibleText(optionToSelect);
+
+	}
+
+	public void selectFromDropDownByValue(By dropDownLocator, String optionValue) {
+
+		logger.info("Finding all elements with the locator " + dropDownLocator);
+		WebElement element = driver.get().findElement(dropDownLocator);
+		Select select = new Select(element);
+		logger.info("Option to select " + optionValue);
+		select.selectByValue(optionValue);
+
+	}
+
+	public void selectCheckbox(By locator) {
+
+		logger.info("Finding element with the locator " + locator);
+		WebElement element = driver.get().findElement(locator);
+		logger.info("Element found and now clickng on the element.");
+		if (!element.isSelected()) {
+
+			element.click();
+			logger.info("Checkbox is selected.");
+
+		} else {
+
+			logger.info("Checkbox is showing already selected.");
+		}
 
 	}
 
