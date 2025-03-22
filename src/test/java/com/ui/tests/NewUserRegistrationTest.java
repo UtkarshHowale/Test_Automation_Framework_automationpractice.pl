@@ -1,5 +1,6 @@
 package com.ui.tests;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.BeforeMethod;
@@ -27,8 +28,8 @@ public class NewUserRegistrationTest extends TestBase {
 	@Test(description = "Verify new user able to create account into the application.")
 	public void registerNewUser() {
 
-		myAccountPage = homePage.goToLoginPage().goToAccountRegistrationPage(loginPOJO)
-				.registerNewUser(registrationPOJO, 0, "16", "April ", "1999");
-		assertTrue(myAccountPage.getAccountCreationSuccessMessage().contains("Your account has been created."));
+		String accountCreationSuccessMessage = homePage.goToLoginPage().goToAccountRegistrationPage(loginPOJO)
+				.registerNewUser(registrationPOJO, 0, "16", "April ", "1999").getAccountCreationSuccessMessage();
+		assertEquals(accountCreationSuccessMessage, "Your account has been created.");
 	}
 }
