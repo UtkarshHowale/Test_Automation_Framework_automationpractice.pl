@@ -58,6 +58,13 @@ jobs:
         cp -R screenshots/ public/extent-reports/screenshots/
         ls -l
 
+    - name: Verify GitHub Token Authentication
+      run: |
+        git config --global user.name "UtkarshHowale"
+        git config --global user.email "utkarshhowale16@gmail.com"
+        git fetch --prune
+        git remote -v    
+
     - name: Deploy 🚀
       if: always()
       uses: JamesIves/github-pages-deploy-action@v4
