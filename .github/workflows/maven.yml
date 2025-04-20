@@ -2,7 +2,7 @@ name: Test Automation Workflow
 
 on:
   schedule:
-    - cron: '00 18 * * *'
+    - cron: '00 18 * * *'  # Daily at 11:30 PM IST
   push:
     branches: [ "master" ]
   pull_request:
@@ -23,62 +23,54 @@ jobs:
         cache: maven
 
     - name: Running Automation Framework With Maven
-      run: mvn test -Dbrowser=chrome -DisLambdaTest=false -DisHeadless=true -X
+      run: |
+        export TZ=Asia/Kolkata
+        echo "Current IST Time: $(date)"
+        mvn test -Dbrowser=chrome -DisLambdaTest=false -DisHeadless=true -X 
 
-    - name: Upload Test Logs
+    - name: Upload Test Logs  
       if: always()
       uses: actions/upload-artifact@v4.6.1
       with:
         name: Test Logs
         path: logs/
 
-    - name: Upload Screenshots as Artifacts (Only if exists)
-      if: always()
-      run: |
-        if [ -d "screenshots" ]; then
-          echo "Uploading screenshots..."
-          tar -czf screenshots.tar.gz screenshots
-        else
-          echo "No screenshots found."
-        fi
-      continue-on-error: true
-
-    - name: Upload screenshots archive
+    - name: Upload Screenshots as Artifacts
       if: always()
       uses: actions/upload-artifact@v4.4.3
       with:
         name: screenshots
-        path: screenshots.tar.gz
+        path: screenshots/      
 
     - name: Upload Test HTML Report as Artifact
       if: always()
       uses: actions/upload-artifact@v4.6.1
       with:
         name: Test Report
-        path: report.html
+        path: report.html  
 
     - name: Test Execution Status
-      run: echo "Test Execution Completed"
+      run: echo "✅ Test Execution Completed"
 
-    - name: Convert UTC to IST and copy report
+    - name: Copy Report to gh-pages Folder
       if: always()
       run: |
-        echo "Converting time to IST..."
-        ist_time=$(TZ=Asia/Kolkata date +"%Y-%m-%d_%H-%M-%S")
-        mkdir -p public/extent-reports
-        cp report.html public/extent-reports/report_${ist_time}.html
+        mkdir -p public/extent-reports/screenshots
+        cp report.html public/extent-reports/
+        cp -R screenshots/* public/extent-reports/screenshots/
+        ls -l public/extent-reports
 
-        if [ -d "screenshots" ]; then
-          cp -R screenshots/ public/extent-reports/screenshots/
-        fi
-
-        echo "Files in public/extent-reports:"
-        ls -l public/extent-reports/
+    - name: Set Git Identity (Fix for deploy step)
+      if: always()
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
 
     - name: Deploy 🚀
       if: always()
       uses: JamesIves/github-pages-deploy-action@v4
       with:
+        branch: gh-pages
         folder: public/extent-reports/
         token: ${{ secrets.SECRETKEY }}
         clean: true
